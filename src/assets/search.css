@@ -30,3 +30,18 @@ form {
   .searchBar:focus::placeholder {
     color: #1DE9B6;
   }
+
+  .card-hover{
+    background-color: #263238;
+  transition: all 0.35s ease-out;
+  }
+
+  .card-hover:hover{
+    background-color: #000;
+  }
+
+  .noDisplay {
+    display: none;
+    opacity: 0;
+    visibility: hidden;
+  }

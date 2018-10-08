@@ -47,7 +47,7 @@ export default class Movie extends Component {
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.movie !== this.state.movie) {
-            this.getData();
+            this.getMovie();
         }
     }
 

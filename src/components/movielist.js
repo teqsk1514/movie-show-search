@@ -7,9 +7,9 @@ export default class MovieList extends Component {
         super(props);
         this.state = {
             movies: [],
-            // pageno: 1,
+            pageno: 2,
         }
-        // this.handlePageChange = this.handlePageChange.bind(this);
+        this.handlePageChange = this.handlePageChange.bind(this);
     }
 
 
@@ -55,12 +55,15 @@ export default class MovieList extends Component {
     componentDidMount() {
         this.fetchall();
     }
-    // handlePageChange() {
-    //     this.setState({
-    //         pageno: this.state.pageno + 1,
-    //     });
-    //     console.log(this.state.pageno);
-    // }
+    handlePageChange() {
+        this.setState({
+            pageno: this.props.page + 1,
+        });
+        console.log(this.state.pageno);
+        // localStorage.setItem('pageno', this.pageno);
+        // this.fetchall();
+        window.location.reload();
+    }
 
     render() {
         return (
@@ -84,9 +87,11 @@ export default class MovieList extends Component {
                     </div>
                     <div className="dropdown-divider" style={{ color: 'wheat' }}></div>
                 </div>
-                <Link to={`/6`}>
-                    <button >Next</button>
-                </Link>
+                <div className='container'>
+                    <Link to={`${Number(this.props.page) + 1}`}>
+                        <button className='nextButton' onClick={this.handlePageChange} >Next</button>
+                    </Link>
+                </div>
             </section >
         )
     }

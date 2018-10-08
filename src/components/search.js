@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import '../assets/search.css'
 import Searchresult from './searchresult';
 
@@ -8,11 +9,14 @@ export default class Search extends Component {
         super(props);
         this.state = {
             results: [],
-            query: ''
+            query: ' ',
+            class: '',
+            showResults: false,
         }
 
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleKeyUp = this.handleKeyUp.bind(this);
+        this.handleClick = this.handleClick.bind(this);
+        this.hide = this.hide.bind(this);
     }
 
     handleSubmit(e) {
@@ -26,9 +30,17 @@ export default class Search extends Component {
         })
         console.log(this.state.query);
 
+        // document.getElementById('results').className = 'formResults';
+        let val = document.getElementById('searchInput').value;
+
+        // if (val === '') {
+        //     document.getElementById('results').className = 'noDisplay';
+        // }
+
+
         const key = 'f6e07a62a81edcb5e9fceb3111b4534a';
 
-        fetch(`https://api.themoviedb.org/3/search/movie?api_key=${key}&language=en-US&query=${this.state.query}&page=1&include_adult=false`)
+        fetch(`https://api.themoviedb.org/3/search/movie?api_key=${key}&language=en-US&query=${val}&page=1&include_adult=false`)
             .then(response => {
                 if (response.status !== 200) {
                     console.log('Error: ' + response.status);
@@ -52,32 +64,20 @@ export default class Search extends Component {
 
     }
 
-    handleKeyUp() {
-        // document.getElementById('results').className = 'formResults';
-        // let val = document.getElementById('searchInput').value;
-        // console.log(this.val);
-        // if (val === '') {
-        //     document.getElementById('results').className = 'noDisplay';
-        // }
+    handleClick() {
+        this.setState({
+            // class: 'noDisplay',
+            showResults: true,
+        });
+        // window.location.reload();
+    }
 
-        // const key = 'f6e07a62a81edcb5e9fceb3111b4534a';
-
-        // fetch(`https://api.themoviedb.org/3/search/movie?api_key=${key}&language=en-US&query=${val}&page=1&include_adult=false`)
-        //     .then(response => {
-        //         if (response.status !== 200) {
-        //             console.log('Error: ' + response.status);
-        //             return;
-        //         }
-
-        //         response.json().then(data => {
-        //             const results = data.results;
-        //             this.setState({ results });
-        //         });
-        //     })
-
-        //     .catch(err => {
-        //         console.log('Fetch Error :-S', err);
-        //     })
+    hide() {
+        this.setState({
+            // class: 'noDisplay',
+            showResults: false,
+        });
+        window.location.reload();
     }
 
     render() {
@@ -87,31 +87,40 @@ export default class Search extends Component {
                     {/* <img src={search} alt="search icon" className="searchIcon" /> */}
                     <input
                         onKeyUp={this.handleKeyUp}
-                        // id="searchInput"
+                        id="searchInput"
                         className="searchBar"
                         type="text"
                         ref={input => this.search = input}
-                        onChange={this.handleInputChange}
+                        onKeyUp={this.handleInputChange}
                         placeholder="Search a movie"
-                        required />
-                    {/* <p style={{ color: 'wheat' }}>{this.state.query}</p> */}
-                    {this.state.results.map((result) => {
-                        return (
-                            <div style={{ display: 'flex' }}>
-                                <div style={{ flex: '1' }}>
-                                    <img src={result.poster_path === null ? 'http://via.placeholder.com/92x150' : `https://image.tmdb.org/t/p/w92/${result.poster_path}`} alt={`${result.title}`} />
+                        required
+                        onClick={this.handleClick}
+                    />
+                    {this.state.showResults ?
+
+                        this.state.results.map((result) => {
+                            return (
+                                <div>
+                                    <Link to={`/movie/${result.id}`}>
+                                        <div className="row card-hover" onClick={this.hide}>
+                                            <div className="col-lg-3 col-md-3 col-sm-3">
+                                                <img src={result.poster_path === null ? 'http://via.placeholder.com/92x150' : `https://image.tmdb.org/t/p/w92/${result.poster_path}`} alt={`${result.title}`} />
+                                            </div>
+                                            <div className="col-lg-9 col-md-9 col-sm-9" style={{ color: 'wheat' }}>
+                                                <div className='text-left'>{result.title}</div>
+                                                <div className='text-left'>{result.release_date}</div>
+                                            </div>
+                                        </div>
+                                    </Link>
                                 </div>
-                                <div style={{ color: 'white', flex: '3' }}>
-                                    <div>{result.title}</div>
-                                    <div>{result.release_date}</div>
-                                </div>
-                                <div className="dropdown-divider" style={{ color: 'wheat' }}></div>
-                            </div>
-                        )
-                    })}
-                    {/* <Searchresult
-                        // id='results'
-                        results={this.state.results} /> */}
+                            )
+                        })
+
+                        :
+                        null
+                    }
+
+                    {/* <Searchresult results={this.state.results} /> */}
                 </form>
             </div>
         )
