@@ -1,5 +1,7 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { Link, Redirect } from 'react-router-dom';
 import Search from './search';
+import MovieList from './movielist';
 
 export default class Nav extends Component {
     render() {
@@ -10,12 +12,17 @@ export default class Nav extends Component {
                 </div>
 
                 <nav className="navbar navbar-light" style={{ backgroundColor: '#222', height: '10vh' }}>
-                    <a className="navbar-brand" href="/"><h1 style={{ color: 'teal' }}><strong>Tv Shows</strong></h1></a>
+                    <a className="navbar-brand" href="/"><h1 style={{ color: 'teal' }}><strong>Movies</strong></h1></a>
                 </nav>
                 <div>
                     <Search />
                 </div>
-                <div className="dropdown-divider"></div>
+                {/* <div>
+                    <Link to={"12"}>
+                        <button>Next</button>
+                    </Link>
+                </div> */}
+                {/* <div className="dropdown-divider"></div> */}
             </div >
         )
     }

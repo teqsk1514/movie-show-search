@@ -10,14 +10,16 @@ form {
     width: 100%;
     background: transparent;
     padding: 20px 0 20px 40px;
-    border: 1px solid #bdbdbd;
+    border: none;
+    border-bottom: 1px solid #bdbdbd;
     color: #000;
     outline: none;
     transition: all 0.35s ease-out;
   }
   
   .searchBar:focus {
-    border: 1px solid #1DE9B6;
+    color:#009061;
+    border-bottom: 1px solid #1DE9B6;
   }
   
   ::placeholder {

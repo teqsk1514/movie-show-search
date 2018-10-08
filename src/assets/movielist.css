@@ -1,0 +1,12 @@
+.newMovies {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+  
+  .newMovies a {
+    width: 100%;
+    display: block;
+    margin-bottom: 30px;
+  }
