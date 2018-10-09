@@ -16,9 +16,10 @@ export default class Movie extends Component {
                     results: [],
                 },
             },
-            videoUrl: '',
+            videoplay: false,
         }
         this.getMovie = this.getMovie.bind(this);
+        this.setVideo = this.setVideo.bind(this);
     }
     getMovie() {
         const key = 'f6e07a62a81edcb5e9fceb3111b4534a';
@@ -34,7 +35,7 @@ export default class Movie extends Component {
                         movie,
                         // videoUrl: this.state.movie.videos.results[0].key,
                     });
-                    console.log(this.state.movie.videos.results[0].key);
+                    // console.log(this.state.movie.videos.results[0].key);
                     console.log(this.state.movie);
                     console.log(this.state.videoUrl);
 
@@ -47,6 +48,12 @@ export default class Movie extends Component {
                 console.log('Error: ' + err);
             })
 
+    }
+
+    setVideo() {
+        this.setState({
+            videoplay: false
+        });
     }
 
     componentDidMount() {
@@ -63,6 +70,29 @@ export default class Movie extends Component {
         return (
             <div className='container'>
                 <Nav />
+
+                <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModalCenter">
+                    Watch Tralier
+                </button>
+
+                {/* <!-- Modal --> */}
+                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content" style={{ background: 'transparent' }}>
+                            <div class="modal-body">
+                                {this.state.movie.videos.results.slice(0, 1).map((video, index) => {
+                                    return (
+                                        <div onClick={this.setVideo} style={{ color: 'white' }}>
+                                            <ReactPlayer key={index} url={`https://www.youtube.com/watch?v=${video.key}`} playing={this.state.videoplay} controls />
+                                        </div>
+
+                                    )
+                                })}
+                                {this.state.videoplay}
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div className='row container' style={{ display: 'flex', flexWrap: 'wrap', width: '100%' }}>
                     <div className='col-lg-9' style={{ color: 'white' }}>
                         <li><span className="bold">Genres: </span> {this.state.movie.genres.map((element, index) => {
@@ -93,19 +123,18 @@ export default class Movie extends Component {
                     <div className='col-lg-3' style={{ color: 'white' }}>
                         <img style={imgBorder} src={this.state.movie.poster_path === null ? 'http://via.placeholder.com/300x450' : `https://image.tmdb.org/t/p/w185/${this.state.movie.poster_path}`} alt={`${this.state.movie.title}`} />
                     </div>
-                    {/* <ReactPlayer url={`https://www.youtube.com/watch?v=${this.state.movie.videos.results[0].key}`} playing /> */}
                 </div>
-                <div className='row'>
+                {/* <div className='row'>
                     {this.state.movie.videos.results.slice(0, 1).map((video, index) => {
                         return (
                             <div style={{ color: 'white' }}>
                                 {console.log(video.key)}
-                                <ReactPlayer key={index} url={`https://www.youtube.com/watch?v=${video.key}`} playing />
+                                <ReactPlayer key={index} url={`https://www.youtube.com/watch?v=${video.key}`} playing={false} controls />
                             </div>
 
                         )
                     })}
-                </div>
+                </div> */}
             </div>
         )
     }
