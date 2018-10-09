@@ -16,7 +16,7 @@ export default class Movie extends Component {
                     results: [],
                 },
             },
-            videoplay: false,
+            showVideo: false,
         }
         this.getMovie = this.getMovie.bind(this);
         this.setVideo = this.setVideo.bind(this);
@@ -35,9 +35,9 @@ export default class Movie extends Component {
                         movie,
                         // videoUrl: this.state.movie.videos.results[0].key,
                     });
-                    // console.log(this.state.movie.videos.results[0].key);
+                    console.log(this.state.movie.videos.results);
                     console.log(this.state.movie);
-                    console.log(this.state.videoplay);
+                    // console.log(this.state.videoplay);
 
                 });
 
@@ -52,7 +52,7 @@ export default class Movie extends Component {
 
     setVideo() {
         this.setState({
-            videoplay: false
+            showVideo: !this.state.showVideo,
         });
     }
 
@@ -81,16 +81,40 @@ export default class Movie extends Component {
                                 {this.state.movie.title}
                             </h1>
                         </div>
-                        <button type="button" className="btn btn-secondary" data-toggle="modal" data-target="#exampleModalCenter">
-                            Watch Tralier
+                        <button onClick={this.setVideo} type="button" className="btn btn-secondary" data-toggle="modal" data-target="#exampleModalCenter">
+                            {this.state.showVideo ? 'Hide Tralier' : 'Watch Tralier'}
                         </button>
+                        <div className='row' style={{ marginTop: '1rem' }}>
+                            {this.state.showVideo ?
+                                <div className='col-lg-12 col-md-6'>
+                                    {this.state.movie.videos.results.slice(0, 1).map((video, index) => {
+                                        return (
+                                            <div className='player-wrapper' key={index} onClick={this.setVideo} style={{ color: 'white' }}>
+                                                <ReactPlayer
+                                                    key={index}
+                                                    url={`https://www.youtube.com/watch?v=${video.key}`}
+                                                    className='player'
+                                                    playing={this.state.videoplay}
+                                                    width='100%'
+                                                    height='100%'
+                                                    controls
+                                                />
+                                            </div>
 
+                                        )
+                                    })}
+                                </div>
+                                :
+                                <div>
+                                </div>
+                            }
+                        </div>
 
                         {/* <!-- Modal --> */}
-                        <div className="modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                            <div className="modal-dialog modal-dialog-centered" role="document">
+                        {/* <div className="modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div className="modal-dialog" role="document">
                                 <div className="modal-content" style={{ background: 'transparent' }}>
-                                    <div className="modal-body" onClick={this.setVideo}>
+                                    <div className="modal-body col-sm-12" onClick={this.setVideo}>
                                         {this.state.movie.videos.results.slice(0, 1).map((video, index) => {
                                             return (
                                                 <div key={index} onClick={this.setVideo} style={{ color: 'white' }}>
@@ -103,7 +127,7 @@ export default class Movie extends Component {
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
                         <li><span className="bold"><h3 style={{ color: '#0074D9' }}>Genres:</h3> </span>{this.state.movie.genres.map((element, index) => {
                             if (index < this.state.movie.genres.length - 1) {
                                 return this.state.movie.genres[index].name + ', '
@@ -116,7 +140,7 @@ export default class Movie extends Component {
                             <h3 style={{ color: '#0074D9' }}>
                                 Rating:
                             </h3>
-                            {this.state.movie.vote_average}
+                            {this.state.movie.vote_average} / 10
                         </li>
                         {console.log(this.state.movie.credits)}
                         <li>
