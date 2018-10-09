@@ -12,13 +12,6 @@ export default class MovieList extends Component {
         this.handlePageChange = this.handlePageChange.bind(this);
     }
 
-
-    // componentWillUpdate() {
-    //     this.setState({
-    //         pageno: 5,
-    //     });
-    // }
-
     fetchall() {
 
         // let todayDate = new Date();
@@ -36,7 +29,6 @@ export default class MovieList extends Component {
                 }
 
                 response.json().then(data => {
-                    // const movies = data.results;
                     this.setState({
                         movies: data.results,
                     });
@@ -60,8 +52,6 @@ export default class MovieList extends Component {
             pageno: this.props.page + 1,
         });
         console.log(this.state.pageno);
-        // localStorage.setItem('pageno', this.pageno);
-        // this.fetchall();
         window.location.reload();
     }
 
