@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+// import { Link, Redirect } from 'react-router-dom';
 import Nav from './components/header';
 import MovieList from './components/movielist';
-import Search from './components/search';
+// import Search from './components/search';
 import Footer from './components/footer';
 
 export default class Home extends Component {

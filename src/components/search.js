@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import '../assets/search.css'
-import Searchresult from './searchresult';
+// import Searchresult from './searchresult';
 
 export default class Search extends Component {
 
@@ -66,7 +66,6 @@ export default class Search extends Component {
 
     handleClick() {
         this.setState({
-            // class: 'noDisplay',
             showResults: true,
         });
         // window.location.reload();
@@ -86,7 +85,6 @@ export default class Search extends Component {
                 <form onSubmit={this.handleSubmit} id="form">
                     {/* <img src={search} alt="search icon" className="searchIcon" /> */}
                     <input
-                        onKeyUp={this.handleKeyUp}
                         id="searchInput"
                         className="searchBar"
                         type="text"

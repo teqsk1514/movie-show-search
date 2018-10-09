@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+// import { Link, Redirect } from 'react-router-dom';
 import Search from './search';
-import MovieList from './movielist';
+// import MovieList from './movielist';
 
 export default class Nav extends Component {
     render() {
