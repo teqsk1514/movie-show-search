@@ -3,6 +3,7 @@ import ReactPlayer from 'react-player'
 import Nav from './header';
 import SimilarMovies from './similarmovies';
 import Footer from './footer';
+import Cast from './cast';
 
 export default class Movie extends Component {
     constructor(props) {
@@ -129,7 +130,7 @@ export default class Movie extends Component {
                             </h3>
                             {this.state.movie.vote_average} / 10
                         </li>
-                        {console.log(this.state.movie.credits)}
+                        {/* {console.log(this.state.movie.credits.cast)} */}
                         <li>
                             <h3 style={{ color: '#0074D9', marginTop: '1rem' }}>
                                 Release Date: <br />
@@ -143,6 +144,10 @@ export default class Movie extends Component {
                             {this.state.movie.overview}
                         </li>
                     </div>
+                </div>
+                <div className='row container' style={{ color: '#0074D9', marginTop: '1rem', marginBottom: '3rem' }}>
+                    <h3>Cast</h3>
+                    <Cast cast={this.state.movie.credits.cast} />
                 </div>
                 <div className='row container' style={{ color: 'white', marginTop: '1rem', marginBottom: '3rem' }}>
                     <SimilarMovies movieId={this.state.movie.id} />

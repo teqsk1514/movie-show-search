@@ -101,10 +101,10 @@ export default class Search extends Component {
                                 <div>
                                     <Link to={`/movie/${result.id}`}>
                                         <div className="row card-hover" onClick={this.hide}>
-                                            <div className="col-lg-3 col-md-3 col-sm-3">
+                                            <div className="col-lg-3 col-md-4 col-sm-2">
                                                 <img src={result.poster_path === null ? 'http://via.placeholder.com/92x150' : `https://image.tmdb.org/t/p/w92/${result.poster_path}`} alt={`${result.title}`} />
                                             </div>
-                                            <div className="col-lg-9 col-md-9 col-sm-9" style={{ color: 'wheat' }}>
+                                            <div className="col-lg-9 col-md-8 col-sm-4" style={{ color: 'wheat' }}>
                                                 <div className='text-left'>{result.title}</div>
                                                 <div className='text-left'>{result.release_date}</div>
                                             </div>

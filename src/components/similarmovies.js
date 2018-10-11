@@ -62,12 +62,15 @@ export default class SimilarMovies extends Component {
                     {/* {console.log(<this className="state"</this>.movie.id)} */}
                 </div>
                 <div className='row' style={{ display: 'flex', flexWrap: 'wrap', width: '100%' }}>
-                    {this.state.movies.map((value, index) => {
+                    {this.state.movies.map((movie, index) => {
                         return (
                             <div key={index} className='col-lg-3 col-md-4 col-sm-6' style={{ display: 'flex', justifyContent: 'center', marginTop: '2rem' }}>
-                                <Link to={`/movie/${value.id}`}>
-                                    <img style={imgBorder} src={value.poster_path === null ? 'http://via.placeholder.com/300x450' : `https://image.tmdb.org/t/p/w185/${value.poster_path}`} alt={`${value.title}`} />
-                                    {/* {value.title} */}
+                                <Link className="movieLink" to={`/movie/${movie.id}`}>
+                                    <img style={imgBorder} src={movie.poster_path === null ? 'http://via.placeholder.com/185x278' : `https://image.tmdb.org/t/p/w185/${movie.poster_path}`} alt={`${movie.title}`} />
+                                    <div className="movieInfo">
+                                        <h3>{movie.title}</h3>
+                                        <p>{movie.release_date}  </p>
+                                    </div>
                                 </Link>
                             </div>
                         );
