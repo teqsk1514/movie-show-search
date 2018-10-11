@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import ReactPlayer from 'react-player'
 import Nav from './header';
+import SimilarMovies from './similarmovies';
+import Footer from './footer';
 
 export default class Movie extends Component {
     constructor(props) {
@@ -35,14 +37,11 @@ export default class Movie extends Component {
                         movie,
                         // videoUrl: this.state.movie.videos.results[0].key,
                     });
-                    console.log(this.state.movie.videos.results);
-                    console.log(this.state.movie);
+                    // console.log(this.state.movie.videos.results);
+                    // console.log(this.state.movie);
                     // console.log(this.state.videoplay);
 
                 });
-
-
-
             })
             .catch(err => {
                 console.log('Error: ' + err);
@@ -63,6 +62,7 @@ export default class Movie extends Component {
     componentWillReceiveProps(nextProps) {
         if (nextProps.movie !== this.state.movie) {
             this.getMovie();
+            window.location.reload();
         }
     }
 
@@ -75,15 +75,16 @@ export default class Movie extends Component {
                     <div className='col-lg-3' style={{ color: 'white', width: '80%', border: '2px sold white' }}>
                         <img style={imgBorder} src={this.state.movie.poster_path === null ? 'http://via.placeholder.com/300x450' : `https://image.tmdb.org/t/p/w300/${this.state.movie.poster_path}`} alt={`${this.state.movie.title}`} />
                     </div>
-                    <div className='col-lg-8 offset-md-1' style={{ color: 'white', listStyle: 'none' }}>
+                    <div className='col-lg-8 offset-md-1' style={{ color: 'white', listStyle: 'none', background: 'transparent' }}>
                         <div style={{ color: '#F9A602' }}>
                             <h1>
                                 {this.state.movie.title}
                             </h1>
                         </div>
-                        <button onClick={this.setVideo} type="button" className="btn btn-secondary" data-toggle="modal" data-target="#exampleModalCenter">
+                        <button onClick={this.setVideo} type="button" className="btn btn-dark">
                             {this.state.showVideo ? 'Hide Tralier' : 'Watch Tralier'}
                         </button>
+
                         <div className='row' style={{ marginTop: '1rem' }}>
                             {this.state.showVideo ?
                                 <div className='col-lg-12 col-md-6'>
@@ -100,7 +101,6 @@ export default class Movie extends Component {
                                                     controls
                                                 />
                                             </div>
-
                                         )
                                     })}
                                 </div>
@@ -109,67 +109,45 @@ export default class Movie extends Component {
                                 </div>
                             }
                         </div>
-
-                        {/* <!-- Modal --> */}
-                        {/* <div className="modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                            <div className="modal-dialog" role="document">
-                                <div className="modal-content" style={{ background: 'transparent' }}>
-                                    <div className="modal-body col-sm-12" onClick={this.setVideo}>
-                                        {this.state.movie.videos.results.slice(0, 1).map((video, index) => {
-                                            return (
-                                                <div key={index} onClick={this.setVideo} style={{ color: 'white' }}>
-                                                    <ReactPlayer key={index} url={`https://www.youtube.com/watch?v=${video.key}`} playing={this.state.videoplay} controls />
-                                                </div>
-
-                                            )
-                                        })}
-                                        {this.state.videoplay}
-                                    </div>
-                                </div>
-                            </div>
-                        </div> */}
-                        <li><span className="bold"><h3 style={{ color: '#0074D9' }}>Genres:</h3> </span>{this.state.movie.genres.map((element, index) => {
-                            if (index < this.state.movie.genres.length - 1) {
-                                return this.state.movie.genres[index].name + ', '
-                            } else {
-                                return this.state.movie.genres[index].name
-                            }
-                        })}
+                        <li>
+                            <span style={{ marginTop: '1rem' }} className="bold">
+                                <h3 style={{ color: '#0074D9' }}>
+                                    Genres:
+                            </h3>
+                            </span>
+                            {this.state.movie.genres.map((element, index) => {
+                                if (index < this.state.movie.genres.length - 1) {
+                                    return this.state.movie.genres[index].name + ', '
+                                } else {
+                                    return this.state.movie.genres[index].name
+                                }
+                            })}
                         </li>
                         <li>
-                            <h3 style={{ color: '#0074D9' }}>
+                            <h3 style={{ color: '#0074D9', marginTop: '1rem' }}>
                                 Rating:
                             </h3>
                             {this.state.movie.vote_average} / 10
                         </li>
                         {console.log(this.state.movie.credits)}
                         <li>
-                            <h3 style={{ color: '#0074D9' }}>
+                            <h3 style={{ color: '#0074D9', marginTop: '1rem' }}>
                                 Release Date: <br />
                             </h3>
                             {this.state.movie.release_date}
                         </li>
                         <li>
-                            <h3 style={{ color: '#0074D9' }}>
+                            <h3 style={{ color: '#0074D9', marginTop: '1rem' }}>
                                 Overview: <br />
                             </h3>
                             {this.state.movie.overview}
                         </li>
                     </div>
                 </div>
-                {/* <div className='row' >
-                    <div><span className="bold"><h3 style={{ color: '#0074D9' }}>Cast:</h3>  </span> {this.state.movie.credits.cast.slice(0, 4).map((element, index) => {
-                        return (
-                            <figure>
-                                <img style={imgBorder} src={this.state.movie.credits.cast[index].profile_path === null ? 'http://via.placeholder.com/300x450' : `https://image.tmdb.org/t/p/w185/${this.state.movie.credits.cast[index].profile_path}`} alt={`${this.state.movie.title}`} />
-                                <figcaption>
-                                    {this.state.movie.credits.cast[index].name}
-                                </figcaption>
-                            </figure>
-                        )
-                    })}
-                    </div>
-                </div> */}
+                <div className='row container' style={{ color: 'white', marginTop: '1rem', marginBottom: '3rem' }}>
+                    <SimilarMovies movieId={this.state.movie.id} />
+                </div>
+                <Footer />
             </div>
         )
     }

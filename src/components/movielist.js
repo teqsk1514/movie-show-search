@@ -20,7 +20,7 @@ export default class MovieList extends Component {
 
         const key = 'f6e07a62a81edcb5e9fceb3111b4534a';
 
-        fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${key}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${this.props.page}`)
+        fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${key}&language=en-US&sort_by=popularity.desc&include_adult=true&include_video=false&page=${this.props.page}`)
             // fetch(`https://api.themoviedb.org/3/discover/tv?api_key=f6e07a62a81edcb5e9fceb3111b4534a&language=en-US&sort_by=popularity.desc&page=1&timezone=America%2FNew_York&include_null_first_air_dates=false`)
             .then(response => {
                 if (response.status !== 200) {
@@ -59,7 +59,7 @@ export default class MovieList extends Component {
         return (
             <section>
                 <h3 style={{ color: 'wheat' }}>
-                    <strong>New Release</strong>
+                    <strong>Popular Movies</strong>
                 </h3>
                 <div className="dropdown-divider" style={{ color: 'wheat' }}></div>
                 <div >
@@ -79,7 +79,7 @@ export default class MovieList extends Component {
                 </div>
                 <div className='container'>
                     <Link to={`${Number(this.props.page) + 1}`}>
-                        <button className='nextButton' onClick={this.handlePageChange} >Next</button>
+                        <button className='nextButton btn btn-light' onClick={this.handlePageChange} >Next</button>
                     </Link>
                 </div>
             </section >
