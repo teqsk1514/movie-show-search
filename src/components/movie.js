@@ -20,6 +20,7 @@ export default class Movie extends Component {
                 },
             },
             showVideo: false,
+            // showVideo: [false, false, false],
         }
         this.getMovie = this.getMovie.bind(this);
         this.setVideo = this.setVideo.bind(this);
@@ -39,7 +40,7 @@ export default class Movie extends Component {
                         // videoUrl: this.state.movie.videos.results[0].key,
                     });
                     // console.log(this.state.movie.videos.results);
-                    // console.log(this.state.movie);
+                    console.log(this.state.movie);
                     // console.log(this.state.videoplay);
 
                 });
@@ -71,7 +72,7 @@ export default class Movie extends Component {
         return (
             <div className='container'>
                 <Nav />
-
+                {console.log(this.state.movie.videos.results.length)}
                 <div className='row conatiner' style={{ display: 'flex', flexWrap: 'wrap', width: '100%' }}>
                     <div className='col-lg-3' style={{ color: 'white', width: '80%', border: '2px sold white' }}>
                         <img style={imgBorder} src={this.state.movie.poster_path === null ? 'http://via.placeholder.com/300x450' : `https://image.tmdb.org/t/p/w300/${this.state.movie.poster_path}`} alt={`${this.state.movie.title}`} />
@@ -82,33 +83,39 @@ export default class Movie extends Component {
                                 {this.state.movie.title}
                             </h1>
                         </div>
-                        <button onClick={this.setVideo} type="button" className="btn btn-dark">
+                        {/* <button onClick={this.setVideo} type="button" className="btn btn-dark">
                             {this.state.showVideo ? 'Hide Tralier' : 'Watch Tralier'}
-                        </button>
+                        </button> */}
 
                         <div className='row' style={{ marginTop: '1rem' }}>
-                            {this.state.showVideo ?
-                                <div className='col-lg-12 col-md-6'>
-                                    {this.state.movie.videos.results.slice(0, 1).map((video, index) => {
-                                        return (
-                                            <div className='player-wrapper' key={index} onClick={this.setVideo} style={{ color: 'white' }}>
-                                                <ReactPlayer
-                                                    key={index}
-                                                    url={`https://www.youtube.com/watch?v=${video.key}`}
-                                                    className='player'
-                                                    playing={this.state.videoplay}
-                                                    width='100%'
-                                                    height='100%'
-                                                    controls
-                                                />
-                                            </div>
-                                        )
-                                    })}
-                                </div>
-                                :
-                                <div>
-                                </div>
-                            }
+                            {/* {this.state.showVideo ? */}
+                            <div className='col-lg-12 col-md-6'>
+                                {this.state.movie.videos.results.slice(0, 1).map((video, index) => {
+                                    return (
+                                        <div key={index} >
+                                            <button onClick={this.setVideo} style={{ marginBottom: '1rem' }} type="button" className="btn btn-dark">
+                                                {this.state.showVideo ? 'Hide Tralier' : video.name}
+                                            </button>
+
+                                            {this.state.showVideo &&
+
+                                                <div className='player-wrapper' onClick={this.setVideo} style={{ color: 'white' }}>
+                                                    <ReactPlayer
+                                                        key={index}
+                                                        url={`https://www.youtube.com/watch?v=${video.key}`}
+                                                        className='player'
+                                                        playing={this.state.videoplay}
+                                                        width='100%'
+                                                        height='100%'
+                                                        controls
+                                                    />
+                                                </div>
+                                            }
+                                        </div>
+                                    )
+                                })}
+                            </div>
+                            {/* } */}
                         </div>
                         <li>
                             <span style={{ marginTop: '1rem' }} className="bold">
