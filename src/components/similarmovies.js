@@ -57,6 +57,11 @@ export default class SimilarMovies extends Component {
                         </div>
                         :
                         <div>
+                            <Link to='/'>
+                                <button className='btn btn-dark'>
+                                    Go to Home!
+                            </button>
+                            </Link>
                         </div>
                     }
                     {/* {console.log(<this className="state"</this>.movie.id)} */}
