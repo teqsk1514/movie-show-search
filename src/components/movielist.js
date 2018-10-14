@@ -58,10 +58,17 @@ export default class MovieList extends Component {
     render() {
         return (
             <section>
-                <h3 style={{ color: 'wheat' }}>
-                    <strong>Popular Movies</strong>
-                </h3>
-                <div className="dropdown-divider" style={{ color: 'wheat' }}></div>
+                <div style={{ display: 'flex' }}>
+                    <h3 style={{ color: 'wheat', flex: '9' }}>
+                        <strong>Popular Movies</strong>
+                    </h3>
+                    <div style={{ flex: '1' }} >
+                        <Link to={`${Number(this.props.page) + 1}`}>
+                            <button className='nextButton btn btn-dark' onClick={this.handlePageChange} >Next</button>
+                        </Link>
+                    </div>
+                </div>
+                {/* <div className="dropdown-divider" style={{ color: 'wheat' }}></div> */}
                 <div >
                     <div className='row' style={{ display: 'flex', flexWrap: 'wrap', width: '100%' }}>
                         {this.state.movies.map((movie, index) => {
@@ -81,11 +88,11 @@ export default class MovieList extends Component {
                     </div>
                     <div className="dropdown-divider" style={{ color: 'wheat' }}></div>
                 </div>
-                <div className='container'>
+                {/* <div className='container'>
                     <Link to={`${Number(this.props.page) + 1}`}>
                         <button className='nextButton btn btn-light' onClick={this.handlePageChange} >Next</button>
                     </Link>
-                </div>
+                </div> */}
             </section >
         )
     }

@@ -12,24 +12,23 @@
   }
 
   .nextButton{
-    background: transparent;
+    /* background: grey; */
     float: right;
     width: 5rem;
-    /* height: 2rem; */
-    border: 1px solid #2196F3;;
-    /* box-shadow: 1px 1px #4CAF50; */
+    /* border: 1px solid rgb(59, 189, 42); */
     font-size: large;
     padding: 10px;
     text-align: center;
     cursor: pointer;
     margin-bottom:2rem;
-    color: white;
+    color: wheat;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 
   }
 
   .nextButton:hover{
-    background: #2196F3;
+    background: rgb(59, 189, 42);
+    color: wheat;
   }
 
   .button {
