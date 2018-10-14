@@ -20,11 +20,27 @@ export default class Movie extends Component {
                 },
             },
             showVideo: false,
+            isToggleOn: [false, false, false]
             // showVideo: [false, false, false],
         }
         this.getMovie = this.getMovie.bind(this);
         this.setVideo = this.setVideo.bind(this);
+        this.handleClick = this.handleClick.bind(this);
     }
+
+
+
+    handleClick(index) {
+        var testData = this.state.isToggleOn;
+
+        if (this.state.isToggleOn[index] === true)
+            testData[index] = false;
+        else
+            testData[index] = true;
+
+        this.setState({ isToggleOn: testData });
+    }
+
     getMovie() {
         const key = 'f6e07a62a81edcb5e9fceb3111b4534a';
 
@@ -69,10 +85,34 @@ export default class Movie extends Component {
     }
 
     render() {
+
+        const videos = this.state.movie.videos.results;
+        const listItems = videos.slice(0, 3).map((video, index) =>
+            <div key={index}>
+                <button style={{ marginBottom: '1rem', marginTop: '1rem' }} type="button" className="btn btn-dark" onClick={this.handleClick.bind(this, index)}>
+                    {this.state.isToggleOn[index] ? 'Hide Trailer' : video.name}
+                </button>
+                {this.state.isToggleOn[index] &&
+                    <div className='player-wrapper' onClick={this.setVideo} style={{ color: 'white' }}>
+                        <ReactPlayer
+                            key={index}
+                            url={`https://www.youtube.com/watch?v=${video.key}`}
+                            className='player'
+                            playing={this.state.videoplay}
+                            width='100%'
+                            height='100%'
+                            controls
+                        />
+                    </div>
+                }
+            </div>
+
+        );
+
         return (
             <div className='container'>
                 <Nav />
-                {console.log(this.state.movie.videos.results.length)}
+                {console.log(this.state.movie.videos.results)}
                 <div className='row conatiner' style={{ display: 'flex', flexWrap: 'wrap', width: '100%' }}>
                     <div className='col-lg-3' style={{ color: 'white', width: '80%', border: '2px sold white' }}>
                         <img style={imgBorder} src={this.state.movie.poster_path === null ? 'http://via.placeholder.com/300x450' : `https://image.tmdb.org/t/p/w300/${this.state.movie.poster_path}`} alt={`${this.state.movie.title}`} />
@@ -82,40 +122,6 @@ export default class Movie extends Component {
                             <h1>
                                 {this.state.movie.title}
                             </h1>
-                        </div>
-                        {/* <button onClick={this.setVideo} type="button" className="btn btn-dark">
-                            {this.state.showVideo ? 'Hide Tralier' : 'Watch Tralier'}
-                        </button> */}
-
-                        <div className='row' style={{ marginTop: '1rem' }}>
-                            {/* {this.state.showVideo ? */}
-                            <div className='col-lg-12 col-md-6'>
-                                {this.state.movie.videos.results.slice(0, 1).map((video, index) => {
-                                    return (
-                                        <div key={index} >
-                                            <button onClick={this.setVideo} style={{ marginBottom: '1rem' }} type="button" className="btn btn-dark">
-                                                {this.state.showVideo ? 'Hide Tralier' : video.name}
-                                            </button>
-
-                                            {this.state.showVideo &&
-
-                                                <div className='player-wrapper' onClick={this.setVideo} style={{ color: 'white' }}>
-                                                    <ReactPlayer
-                                                        key={index}
-                                                        url={`https://www.youtube.com/watch?v=${video.key}`}
-                                                        className='player'
-                                                        playing={this.state.videoplay}
-                                                        width='100%'
-                                                        height='100%'
-                                                        controls
-                                                    />
-                                                </div>
-                                            }
-                                        </div>
-                                    )
-                                })}
-                            </div>
-                            {/* } */}
                         </div>
                         <li>
                             <span style={{ marginTop: '1rem' }} className="bold">
@@ -150,8 +156,12 @@ export default class Movie extends Component {
                             </h3>
                             {this.state.movie.overview}
                         </li>
+                        {listItems}
                     </div>
                 </div>
+                {/* <div className='row container' style={{ color: '#0074D9', marginTop: '1rem', marginBottom: '3rem' }}>
+                    {listItems}
+                </div> */}
                 <div className='row container' style={{ color: '#0074D9', marginTop: '1rem', marginBottom: '3rem' }}>
                     <h3>Cast</h3>
                     <Cast cast={this.state.movie.credits.cast} />
