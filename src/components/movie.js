@@ -88,7 +88,7 @@ export default class Movie extends Component {
     render() {
 
         const videos = this.state.movie.videos.results;
-        const listItems = videos.slice(0, 3).map((video, index) =>
+        const videosList = videos.slice(0, 3).map((video, index) =>
             <div key={index}>
                 <button style={{ marginBottom: '1rem', marginTop: '1rem' }} type="button" className="btn btn-dark" onClick={this.handleClick.bind(this, index)}>
                     {this.state.isToggleOn[index] ? 'Hide Trailer' : video.name}
@@ -160,24 +160,22 @@ export default class Movie extends Component {
                                 </h3>
                                 {this.state.movie.overview}
                             </li>
-                            {listItems}
+                            {videosList}
                         </div>
                     </Fade>
                 </div>
                 {/* <div className='row container' style={{ color: '#0074D9', marginTop: '1rem', marginBottom: '3rem' }}>
                     {listItems}
                 </div> */}
-                <div className='row container' style={{ color: '#0074D9', marginTop: '1rem', marginBottom: '3rem' }}>
-                    <h3>Cast</h3>
-                    <Fade bottom duration={3000}>
+                <Fade bottom >
+                    <div className='row container' style={{ color: '#0074D9', marginTop: '1rem', marginBottom: '3rem' }}>
+                        <h3>Cast</h3>
                         <Cast cast={this.state.movie.credits.cast} />
-                    </Fade>
-                </div>
-                <div className='row container' style={{ color: 'white', marginTop: '1rem', marginBottom: '3rem' }}>
-                    <Fade bottom duration={6000}>
+                    </div>
+                    <div className='row container' style={{ color: 'white', marginTop: '1rem', marginBottom: '3rem' }}>
                         <SimilarMovies movieId={this.state.movie.id} />
-                    </Fade>
-                </div>
+                    </div>
+                </Fade>
                 <Footer />
             </div>
         )

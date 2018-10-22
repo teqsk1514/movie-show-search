@@ -48,6 +48,18 @@ export default class SimilarMovies extends Component {
 
 
     render() {
+        const simliarmovies = this.state.movies;
+        const moviesListSimilar = simliarmovies.map((movie, index) =>
+            <div key={index} className='col-lg-3 col-md-4 col-sm-6' style={{ display: 'flex', justifyContent: 'center', marginTop: '2rem' }}>
+                <Link className="movieLink" to={`/movie/${movie.id}`}>
+                    <img style={imgBorder} src={movie.poster_path === null ? 'http://via.placeholder.com/185x278' : `https://image.tmdb.org/t/p/w185/${movie.poster_path}`} alt={`${movie.title}`} />
+                    <div className="movieInfo">
+                        <h3>{movie.title}</h3>
+                        <p>{movie.release_date}  </p>
+                    </div>
+                </Link>
+            </div>
+        );
         return (
             < div >
                 <div className='row container' style={{ color: '#0074D9', marginTop: '2rem' }}>
@@ -67,19 +79,7 @@ export default class SimilarMovies extends Component {
                     {/* {console.log(<this className="state"</this>.movie.id)} */}
                 </div>
                 <div className='row' style={{ display: 'flex', flexWrap: 'wrap', width: '100%' }}>
-                    {this.state.movies.map((movie, index) => {
-                        return (
-                            <div key={index} className='col-lg-3 col-md-4 col-sm-6' style={{ display: 'flex', justifyContent: 'center', marginTop: '2rem' }}>
-                                <Link className="movieLink" to={`/movie/${movie.id}`}>
-                                    <img style={imgBorder} src={movie.poster_path === null ? 'http://via.placeholder.com/185x278' : `https://image.tmdb.org/t/p/w185/${movie.poster_path}`} alt={`${movie.title}`} />
-                                    <div className="movieInfo">
-                                        <h3>{movie.title}</h3>
-                                        <p>{movie.release_date}  </p>
-                                    </div>
-                                </Link>
-                            </div>
-                        );
-                    })}
+                    {moviesListSimilar}
                 </div>
             </div >
         )

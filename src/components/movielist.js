@@ -57,6 +57,18 @@ export default class MovieList extends Component {
     }
 
     render() {
+        const movies = this.state.movies;
+        const movielist = movies.map((movie, index) =>
+            <div key={index} className='col-lg-3 col-md-4 col-sm-6' style={{ display: 'flex', justifyContent: 'center', marginTop: '2rem' }}>
+                <Link className="movieLink" to={`/movie/${movie.id}`}>
+                    <img style={imgBorder} src={movie.poster_path === null ? 'http://via.placeholder.com/300x450' : `https://image.tmdb.org/t/p/w185/${movie.poster_path}`} alt={`${movie.title}`} />
+                    <div className="movieInfo">
+                        <h3>{movie.title}</h3>
+                        <p>{movie.release_date}  </p>
+                    </div>
+                </Link>
+            </div>
+        );
         return (
             <Fade>
                 <section>
@@ -74,23 +86,10 @@ export default class MovieList extends Component {
                     <div >
                         <Fade bottom>
                             <div className='row' style={{ display: 'flex', flexWrap: 'wrap', width: '100%' }}>
-                                {this.state.movies.map((movie, index) => {
-                                    return (
-
-                                        <div key={index} className='col-lg-3 col-md-4 col-sm-6' style={{ display: 'flex', justifyContent: 'center', marginTop: '2rem' }}>
-                                            <Link className="movieLink" to={`/movie/${movie.id}`}>
-                                                <img style={imgBorder} src={movie.poster_path === null ? 'http://via.placeholder.com/300x450' : `https://image.tmdb.org/t/p/w185/${movie.poster_path}`} alt={`${movie.title}`} />
-                                                <div className="movieInfo">
-                                                    <h3>{movie.title}</h3>
-                                                    <p>{movie.release_date}  </p>
-                                                </div>
-                                            </Link>
-                                        </div>
-                                    )
-                                })}
+                                {movielist}
                             </div>
+                            <div className="dropdown-divider" style={{ color: 'wheat', marginTop: '4rem' }}></div>
                         </Fade>
-                        <div className="dropdown-divider" style={{ color: 'wheat' }}></div>
                     </div>
                     {/* <div className='container'>
                     <Link to={`${Number(this.props.page) + 1}`}>
