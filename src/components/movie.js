@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ReactPlayer from 'react-player'
 import Nav from './header';
+import Fade from 'react-reveal/Fade';
 import SimilarMovies from './similarmovies';
 import Footer from './footer';
 import Cast from './cast';
@@ -112,62 +113,70 @@ export default class Movie extends Component {
         return (
             <div className='container'>
                 <Nav />
-                {console.log(this.state.movie.videos.results)}
+                {/* {console.log(this.state.movie.videos.results)} */}
                 <div className='row conatiner' style={{ display: 'flex', flexWrap: 'wrap', width: '100%' }}>
-                    <div className='col-lg-3' style={{ color: 'white', width: '80%', border: '2px sold white' }}>
-                        <img style={imgBorder} src={this.state.movie.poster_path === null ? 'http://via.placeholder.com/300x450' : `https://image.tmdb.org/t/p/w300/${this.state.movie.poster_path}`} alt={`${this.state.movie.title}`} />
-                    </div>
-                    <div className='col-lg-8 offset-md-1' style={{ color: 'white', listStyle: 'none', background: 'transparent' }}>
-                        <div style={{ color: '#F9A602' }}>
-                            <h1>
-                                {this.state.movie.title}
-                            </h1>
+                    <Fade left>
+                        <div className='col-lg-3' style={{ color: 'white', width: '80%', border: '2px sold white' }}>
+                            <img style={imgBorder} src={this.state.movie.poster_path === null ? 'http://via.placeholder.com/300x450' : `https://image.tmdb.org/t/p/w300/${this.state.movie.poster_path}`} alt={`${this.state.movie.title}`} />
                         </div>
-                        <li>
-                            <span style={{ marginTop: '1rem' }} className="bold">
-                                <h3 style={{ color: '#0074D9' }}>
-                                    Genres:
+                    </Fade>
+                    <Fade right>
+                        <div className='col-lg-8 offset-md-1' style={{ color: 'white', listStyle: 'none', background: 'transparent' }}>
+                            <div style={{ color: '#F9A602' }}>
+                                <h1>
+                                    {this.state.movie.title}
+                                </h1>
+                            </div>
+                            <li>
+                                <span style={{ marginTop: '1rem' }} className="bold">
+                                    <h3 style={{ color: '#0074D9' }}>
+                                        Genres:
                             </h3>
-                            </span>
-                            {this.state.movie.genres.map((element, index) => {
-                                if (index < this.state.movie.genres.length - 1) {
-                                    return this.state.movie.genres[index].name + ', '
-                                } else {
-                                    return this.state.movie.genres[index].name
-                                }
-                            })}
-                        </li>
-                        <li>
-                            <h3 style={{ color: '#0074D9', marginTop: '1rem' }}>
-                                Rating:
+                                </span>
+                                {this.state.movie.genres.map((element, index) => {
+                                    if (index < this.state.movie.genres.length - 1) {
+                                        return this.state.movie.genres[index].name + ', '
+                                    } else {
+                                        return this.state.movie.genres[index].name
+                                    }
+                                })}
+                            </li>
+                            <li>
+                                <h3 style={{ color: '#0074D9', marginTop: '1rem' }}>
+                                    Rating:
                             </h3>
-                            {this.state.movie.vote_average} / 10
+                                {this.state.movie.vote_average} / 10
                         </li>
-                        {/* {console.log(this.state.movie.credits.cast)} */}
-                        <li>
-                            <h3 style={{ color: '#0074D9', marginTop: '1rem' }}>
-                                Release Date: <br />
-                            </h3>
-                            {this.state.movie.release_date}
-                        </li>
-                        <li>
-                            <h3 style={{ color: '#0074D9', marginTop: '1rem' }}>
-                                Overview: <br />
-                            </h3>
-                            {this.state.movie.overview}
-                        </li>
-                        {listItems}
-                    </div>
+                            {/* {console.log(this.state.movie.credits.cast)} */}
+                            <li>
+                                <h3 style={{ color: '#0074D9', marginTop: '1rem' }}>
+                                    Release Date: <br />
+                                </h3>
+                                {this.state.movie.release_date}
+                            </li>
+                            <li>
+                                <h3 style={{ color: '#0074D9', marginTop: '1rem' }}>
+                                    Overview: <br />
+                                </h3>
+                                {this.state.movie.overview}
+                            </li>
+                            {listItems}
+                        </div>
+                    </Fade>
                 </div>
                 {/* <div className='row container' style={{ color: '#0074D9', marginTop: '1rem', marginBottom: '3rem' }}>
                     {listItems}
                 </div> */}
                 <div className='row container' style={{ color: '#0074D9', marginTop: '1rem', marginBottom: '3rem' }}>
                     <h3>Cast</h3>
-                    <Cast cast={this.state.movie.credits.cast} />
+                    <Fade bottom duration={3000}>
+                        <Cast cast={this.state.movie.credits.cast} />
+                    </Fade>
                 </div>
                 <div className='row container' style={{ color: 'white', marginTop: '1rem', marginBottom: '3rem' }}>
-                    <SimilarMovies movieId={this.state.movie.id} />
+                    <Fade bottom duration={6000}>
+                        <SimilarMovies movieId={this.state.movie.id} />
+                    </Fade>
                 </div>
                 <Footer />
             </div>

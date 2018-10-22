@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 // import { Link, Redirect } from 'react-router-dom';
+import Fade from 'react-reveal/Fade';
 import Nav from './components/header';
 import MovieList from './components/movielist';
 // import Search from './components/search';
@@ -19,7 +20,9 @@ export default class Home extends Component {
             <div>
                 <div className='container'>
                     <Nav />
+                    {/* <Fade bottom> */}
                     <MovieList page={this.state.pageno} />
+                    {/* </Fade> */}
                     <Footer />
                 </div>
             </div >
