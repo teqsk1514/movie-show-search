@@ -14,7 +14,7 @@ export default class SimilarMovies extends Component {
 
     getSimilar(ids) {
 
-        const key = 'f6e07a62a81edcb5e9fceb3111b4534a';
+        const key = <your api key>;
         // const id = this.state.mid;
         console.log(this.state.mid)
         fetch(`https://api.themoviedb.org/3/movie/${ids}/similar?api_key=${key}&language=en-US&page=1`)
