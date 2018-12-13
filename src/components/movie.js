@@ -43,7 +43,7 @@ export default class Movie extends Component {
     }
 
     getMovie() {
-        const key = 'f6e07a62a81edcb5e9fceb3111b4534a';
+        const key = <your api key>;
 
         fetch(`https://api.themoviedb.org/3/movie/${this.props.match.params.id}?api_key=${key}&append_to_response=videos%2Ccredits`)
             .then(response => {
