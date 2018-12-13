@@ -38,7 +38,7 @@ export default class Search extends Component {
         // }
 
 
-        const key = 'f6e07a62a81edcb5e9fceb3111b4534a';
+        const key = <your api key>;
 
         fetch(`https://api.themoviedb.org/3/search/movie?api_key=${key}&language=en-US&query=${val}&page=1&include_adult=false`)
             .then(response => {
