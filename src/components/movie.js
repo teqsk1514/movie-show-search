@@ -30,7 +30,6 @@ export default class Movie extends Component {
     }
 
 
-
     handleClick(index) {
         var testData = this.state.isToggleOn;
 

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 // import { Link, Redirect } from 'react-router-dom';
-import Fade from 'react-reveal/Fade';
+// import Fade from 'react-reveal/Fade';
 import Nav from './components/header';
 import MovieList from './components/movielist';
 // import Search from './components/search';

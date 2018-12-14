@@ -33,9 +33,6 @@ export default class Search extends Component {
         // document.getElementById('results').className = 'formResults';
         let val = document.getElementById('searchInput').value;
 
-        // if (val === '') {
-        //     document.getElementById('results').className = 'noDisplay';
-        // }
 
 
         const key = 'f6e07a62a81edcb5e9fceb3111b4534a';

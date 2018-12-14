@@ -13,7 +13,6 @@ export default class SimilarMovies extends Component {
 
 
     getSimilar(ids) {
-
         const key = 'f6e07a62a81edcb5e9fceb3111b4534a';
         // const id = this.state.mid;
         console.log(this.state.mid)

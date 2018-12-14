@@ -15,9 +15,6 @@ export default class MovieList extends Component {
 
     fetchall() {
 
-        // let todayDate = new Date();
-        // let today = todayDate.getFullYear() + '-' + (todayDate.getMonth() + 1) + '-' + todayDate.getDate();
-        // let oneMonthAgo = (todayDate.getMonth() === 0 ? todayDate.getFullYear() - 1 : todayDate.getFullYear()) + '-' + (todayDate.getMonth() === 0 ? todayDate.getMonth() + 12 : todayDate.getMonth()) + '-' + todayDate.getDate();
 
         const key = 'f6e07a62a81edcb5e9fceb3111b4534a';
 
